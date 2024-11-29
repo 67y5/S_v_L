@@ -40,11 +40,3 @@ Replace 'your_client_id' and 'your_client_secret' with your actual Spotify Clien
 Note: The Redirect URI should match the one you entered when creating your Spotify app (typically, http://localhost:8888/callback for local development).
 
 
-### Key Elements:
-- **Bold**: Key actions like `Spotify Developer` and **Client ID** are highlighted in bold for clarity.
-- **Ordered List**: Steps are organized for easy reading.
-- **Code Blocks**: The Python code is wrapped in a code block for better readability.
-- **Link**: The **Spotify Developer Dashboard** is linked to for easy navigation.
-- **Note**: A note is added at the end to clarify the usage of the Redirect URI.
-
-This will result in a well-structured and easy-to-follow guide in your `README.md` when displayed on GitHub.
