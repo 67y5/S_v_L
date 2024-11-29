@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify vs Local Music</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .coolinput {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .coolinput label.text {
+            font-size: 0.75rem;
+            color: #818CF8;
+            font-weight: 700;
+            position: relative;
+            top: 0.5rem;
+            margin: 0 0 0 7px;
+            padding: 0 3px;
+            background: #f4f4f9;
+            width: fit-content;
+        }
+
+        .coolinput input[type=text].input {
+            padding: 11px 10px;
+            font-size: 0.75rem;
+            border: 2px #1DB954 solid;
+            border-radius: 5px;
+            background: #f4f4f9;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .coolinput input[type=text].input:focus {
+            outline: none;
+        }
+
+        input[type="submit"] {
+            padding: 12px 30px;
+            background-color: #818CF8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #6c63f4;
+        }
+
+        /* Bounce animation */
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            30% {
+                transform: scale(1.1);
+            }
+            50% {
+                transform: scale(0.9);
+            }
+            70% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        input[type="submit"]:active {
+            animation: bounce 0.3s ease-out;
+        }
+
+        .results-container {
+            margin-top: 20px;
+        }
+
+        .results-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .results-container li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Compare Spotify Playlist with Local Music</h1>
+        <form method="POST" action="/">
+            <div class="coolinput">
+                <label for="playlist_id" class="text">Spotify Playlist ID:</label>
+                <input type="text" id="playlist_id" name="playlist_id" class="input" required>
+            </div>
+            
+            <div class="coolinput">
+                <label for="local_directory" class="text">Local Music Directory:</label>
+                <input type="text" id="local_directory" name="local_directory" class="input" required>
+            </div>
+
+            <input type="submit" value="Compare">
+        </form>
+    </div>
+</body>
+</html>

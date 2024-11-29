@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing Tracks</title>
+</head>
+<body>
+<h1>Comparison Results</h1>
+
+<div class="summary">
+    <p><strong>Total Tracks in Spotify Playlist:</strong> {{ total_spotify_tracks }}</p>
+    <p><strong>Total Tracks in Local Folder:</strong> {{ total_local_tracks }}</p>
+    {% if all_tracks_present %}
+        <p style="color: green;"><strong>All tracks are present in your local library!</strong></p>
+    {% else %}
+        <p style="color: red;"><strong>Missing Tracks: {{ missing_tracks | length }}</strong></p>
+    {% endif %}
+</div>
+
+<div class="search-bar">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search missing tracks..."
+        onkeyup="filterTracks()"
+    >
+</div>
+
+<div id="trackList" class="track-list">
+    {% for track in missing_tracks %}
+        <div class="track-item">
+            <img src="{{ track.cover_url }}" alt="{{ track.name }} Cover">
+            <div class="overlay">
+                <a href="{{ track.url }}" target="_blank">
+                    <button>Open in Spotify</button>
+                </a>
+            </div>
+            <h3 class="track-name">{{ track.name }}</h3>
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    function filterTracks() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toLowerCase();
+        const trackList = document.getElementById("trackList");
+        const tracks = trackList.getElementsByClassName("track-item");
+
+        for (let i = 0; i < tracks.length; i++) {
+            const trackName = tracks[i].getElementsByClassName("track-name")[0];
+            if (trackName.innerText.toLowerCase().includes(filter)) {
+                tracks[i].style.display = "";
+            } else {
+                tracks[i].style.display = "none";
+            }
+        }
+    }
+
+</script>
+
+<!------------------------------------------------------------->
+
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h1 {
+        margin-top: 20px;
+        color: #333;
+    }
+
+    .track-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .track-item {
+        position: relative;
+        background: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 100%;
+        max-width: 150px;
+        margin: 0 auto;
+    }
+
+    .track-item img {
+        width: 100%;
+        max-width: 120px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .track-item:hover img {
+        transform: scale(1.1);
+    }
+
+    .track-item .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .track-item:hover .overlay {
+        opacity: 1;
+    }
+
+    .track-item .overlay button {
+        background: #1DB954;
+        color: white;
+        font-size: 0.9rem;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        cursor: pointer;
+        text-transform: uppercase;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .track-item .overlay button:hover {
+        background: #1AA34A;
+    }
+
+    .track-item h3 {
+        font-size: 0.85rem;
+        margin-top: 10px;
+        color: #333;
+        word-wrap: break-word;
+    }
+</style>
+
+<!------------------------------------------------------------->
+<!--search bar,  cover image----->
+
+<style>
+    <style>
+        .search-bar {
+            margin: 20px 0;
+            text-align: center;
+        }
+    
+        #searchInput {
+        width: 300%;
+        max-width: 500px;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #818CF8;
+    ;  /* Default border color */
+        border-radius: 5px;
+        outline: none;
+        position: relative;
+        transform: translateX(-200px);  /* Shift the search bar */
+        z-index: 10;  /* Ensure the input is on top */
+    }
+    
+    /* Focus effect: changes the border to green */
+    #searchInput:focus {
+        border-color: #1DB954
+        ;  /* Green border when focused */
+        box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);  /* Light green shadow */
+    }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+    
+        .track-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    
+        .track-item {
+            position: relative;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 150px;
+            margin: 0 auto;
+        }
+    
+        .track-item img {
+            width: 100%;
+            max-width: 120px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+    
+        .track-item:hover img {
+            transform: scale(1.1);
+        }
+    
+        .track-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+    
+        .track-item:hover .overlay {
+            opacity: 1;
+        }
+    
+        .track-item .overlay button {
+            background: #1DB954;
+            color: white;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        .track-item .overlay button:hover {
+            background: #1AA34A;
+        }
+    
+        .track-item h3 {
+            font-size: 0.85rem;
+            margin-top: 10px;
+            color: #333;
+            word-wrap: break-word;
+        }
+</style>
+
+</body>
+</html>
